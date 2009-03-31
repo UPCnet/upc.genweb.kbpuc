@@ -1,0 +1,29 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="upc.genweb.kbpuc">
+
+    <class class=".servei.Servei">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.IServei"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.IServei"
+            />
+    </class>
+
+    <class class=".faq.Faq">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.IFaq"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.IFaq"
+            />
+    </class>
+
+</configure>
+

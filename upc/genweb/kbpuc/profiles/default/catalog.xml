@@ -17,6 +17,15 @@
   <element name="Unicode Case Normalizer" group="Case Normalizer"/>
  </object>
 
+ <index name="getServei" meta_type="FieldIndex">
+    <indexed_attr value="getServei"/>
+ </index>
+ <column value="getServei"/>  
+
+ <index name="getCategoria" meta_type="FieldIndex">
+    <indexed_attr value="getCategoria"/>
+ </index>
+ <column value="getCategoria"/>  
 
 </object>
 

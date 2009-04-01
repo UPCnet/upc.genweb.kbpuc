@@ -25,5 +25,38 @@
             />
     </class>
 
+    <class class=".procediment.Procediment">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.IProcediment"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.IProcediment"
+            />
+    </class>
+
+    <class class=".infogeneral.InfoGeneral">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.IInfoGeneral"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.IInfoGeneral"
+            />
+    </class>
+
+    <class class=".categoria.Categoria">
+        <require
+            permission="zope2.View"
+            interface="..interfaces.ICategoria"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema="..interfaces.ICategoria"
+            />
+    </class>
+
 </configure>
 

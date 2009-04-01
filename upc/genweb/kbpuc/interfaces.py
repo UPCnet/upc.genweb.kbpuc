@@ -16,3 +16,14 @@ class IFaq(Interface):
     """A faq Content Type
     """
 
+class IProcediment(Interface):
+    """A procediment Content Type
+    """
+
+class IInfoGeneral(Interface):
+    """A InfoGeneral Content Type
+    """
+
+class ICategoria(Interface):
+    """A Categoria Content Type
+    """

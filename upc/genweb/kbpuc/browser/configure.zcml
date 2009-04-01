@@ -36,6 +36,53 @@
         />
 
     <browser:page
+        for="..interfaces.IProcediment"
+        name="view"
+        class=".procediment.ProcedimentView"
+        permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="..interfaces.IProcediment"
+        menu="plone_displayviews"
+        title="Procediment view"
+        action="@@view"
+        description="Default representation of a Procediment."
+        />
+
+
+    <browser:page
+        for="..interfaces.IInfoGeneral"
+        name="view"
+        class=".infogeneral.InfoGeneralView"
+        permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="..interfaces.IInfoGeneral"
+        menu="plone_displayviews"
+        title="InfoGeneral view"
+        action="@@view"
+        description="Default representation of a InfoGeneral."
+        />
+
+    <browser:page
+        for="..interfaces.ICategoria"
+        name="view"
+        class=".categoria.CategoriaView"
+        permission="zope2.View"
+        />
+
+    <browser:menuItem
+        for="..interfaces.ICategoria"
+        menu="plone_displayviews"
+        title="Categoria view"
+        action="@@view"
+        description="Default representation of a categoria."
+        />
+
+
+    <browser:page
         for="*"
         name="cerca-serveis-kbpuc"
         class=".servei.cercaServeis"

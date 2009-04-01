@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Definition of the faq content type
+"""Definition of the servei content type
 """
 
 from zope.interface import implements, directlyProvides
@@ -10,6 +10,7 @@ from DateTime import DateTime
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.permissions import View
 from Products.CMFCore.permissions import ModifyPortalContent
+from Products.Archetypes.atapi import Schema
 
 from Products.Archetypes import atapi
 from Products.Archetypes.public import DisplayList
@@ -19,26 +20,25 @@ from Products.ATContentTypes.configuration import zconf
 from Products.validation import V_REQUIRED
 
 from upc.genweb.kbpuc import kbpucMessageFactory as _
-from upc.genweb.kbpuc.interfaces import IFaq
+from upc.genweb.kbpuc.interfaces import ICategoria
 from upc.genweb.kbpuc.config import PROJECTNAME
 
-from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocument
-
+from Products.ATContentTypes.content.folder import ATFolderSchema, ATFolder
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-faq_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
+categoria_kbpuc_Schema = ATFolderSchema.copy() + atapi.Schema((
 
 ))
 
-schemata.finalizeATCTSchema(faq_kbpuc_Schema, moveDiscussion=False)
+schemata.finalizeATCTSchema(categoria_kbpuc_Schema, moveDiscussion=False)
 
-class Faq(ATDocument):
-    """FAQ KBPUC """
+class Categoria(ATFolder):
+    """Categoria KBPUC """
 
-    portal_type = "Faq"
-    schema = faq_kbpuc_Schema
+    portal_type = "Categoria"
+    schema = categoria_kbpuc_Schema
 
-    implements(IFaq)
+    implements(ICategoria)
 
-atapi.registerType(Faq, PROJECTNAME)
+atapi.registerType(Categoria, PROJECTNAME)
 

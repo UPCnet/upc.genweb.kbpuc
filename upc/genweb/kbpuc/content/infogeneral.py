@@ -19,26 +19,26 @@ from Products.ATContentTypes.configuration import zconf
 from Products.validation import V_REQUIRED
 
 from upc.genweb.kbpuc import kbpucMessageFactory as _
-from upc.genweb.kbpuc.interfaces import IFaq
+from upc.genweb.kbpuc.interfaces import IInfoGeneral
 from upc.genweb.kbpuc.config import PROJECTNAME
 
 from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocument
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-faq_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
+infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
 ))
 
-schemata.finalizeATCTSchema(faq_kbpuc_Schema, moveDiscussion=False)
+schemata.finalizeATCTSchema(infogeneral_kbpuc_Schema, moveDiscussion=False)
 
-class Faq(ATDocument):
-    """FAQ KBPUC """
+class InfoGeneral(ATDocument):
+    """InfoGeneral KBPUC """
 
-    portal_type = "Faq"
-    schema = faq_kbpuc_Schema
+    portal_type = "InfoGeneral"
+    schema = infogeneral_kbpuc_Schema
 
-    implements(IFaq)
+    implements(IInfoGeneral)
 
-atapi.registerType(Faq, PROJECTNAME)
+atapi.registerType(InfoGeneral, PROJECTNAME)
 

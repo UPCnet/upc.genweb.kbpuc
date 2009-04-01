@@ -14,6 +14,21 @@
         <role name="WebMaster" />
         <role name="Contributor" />
     </permission>
+    <permission name="Procediment: Add Procediment" acquire="False">
+        <role name="Manager" />
+        <role name="WebMaster" />
+        <role name="Contributor" />
+    </permission>
+    <permission name="InfoGeneral: Add InfoGeneral" acquire="False">
+        <role name="Manager" />
+        <role name="WebMaster" />
+        <role name="Contributor" />
+    </permission>
+    <permission name="Categoria: Add Categoria" acquire="False">
+        <role name="Manager" />
+        <role name="WebMaster" />
+        <role name="Contributor" />
+    </permission>
   </permissions>
 </rolemap>
 

@@ -14,4 +14,12 @@
  <object name="Faq"
          meta_type="Factory-based Type Information with dynamic views"/>
          
+ <object name="Procediment"
+         meta_type="Factory-based Type Information with dynamic views"/>
+
+ <object name="InfoGeneral"
+         meta_type="Factory-based Type Information with dynamic views"/>
+
+ <object name="Categoria"
+         meta_type="Factory-based Type Information with dynamic views"/>
 </object>

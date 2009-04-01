@@ -3,5 +3,8 @@
   <factorytypes>
     <type portal_type="Servei"/>
     <type portal_type="Faq"/>
+    <type portal_type="Procediment"/>
+    <type portal_type="InfoGeneral"/>
+    <type portal_type="Categoria"/>
   </factorytypes>
 </object>

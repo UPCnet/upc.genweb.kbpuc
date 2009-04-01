@@ -94,13 +94,12 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         languageIndependent=True,
         default = "getRegistro",        
         widget = atapi.StringWidget(
-            label = _(u'label_height', default=u'registro'),
+            label = _(u'label_height', default=u'Registro'),
             i18n_domain='upc.genweb.kbpuc',
             visible = {'edit': 'hidden'}
         ),
         schemata="default",
     ),
-
 
 ))
 

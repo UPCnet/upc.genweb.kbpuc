@@ -23,14 +23,107 @@ from upc.genweb.kbpuc.interfaces import IProcediment
 from upc.genweb.kbpuc.config import PROJECTNAME
 
 from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocument
+from datetime import datetime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
 procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
+    atapi.TextField('informacio',
+        required=False,
+        searchable=True,
+        storage = atapi.AnnotationStorage(migrate=True),
+        validators = ('isTidyHtmlWithCleanup',),
+        #validators = ('isTidyHtml',),
+        default_output_type = 'text/x-html-safe',
+        widget = atapi.RichWidget(
+            i18n_domain='upc.genweb.kbpuc',
+            label=_(u'label_informacio_entrada', default=u'Informació entrada'),
+            rows = 25,
+            allow_file_upload = zconf.ATDocument.allow_document_upload),
+        schemata="default",
+    ),
+
+    atapi.LinesField(
+        name='producte_p',
+        widget=atapi.MultiSelectionWidget(
+            format="select",
+            label = _(u'label_producte', default=u'Producte'),
+            i18n_domain='upc.genweb.kbpuc',
+        ),
+        languageIndependent=True,
+        multiValued=False,
+        schemata="default",
+        vocabulary='getProducteVocabulary',
+        enforceVocabulary = True,
+    ),
+
+    atapi.StringField(
+        name='tipus_document',
+        required = False,
+        widget=atapi.MultiSelectionWidget(
+            label = _(u'tipus_document', default=u'Tipus Document'),
+            format = 'checkbox',
+            i18n_domain='upc.genweb.kbpuc',
+        ),
+        languageindependent=True,
+        vocabulary='getTipusDocument',
+        schemata="default",
+    ),
+
+    atapi.LinesField('equip',
+        required=False,
+        vocabulary='getEquip',
+        enforceVocabulary=True,
+        widget=atapi.InAndOutWidget(
+            label="Equips a qui assignar el tiquet",
+            label_msgid="lista_equips",
+            description="",
+            description_msgid="lista_equips_description",
+            i18n_domain = "upc.genweb.kbpuc"),                  
+    ),
+
+    atapi.TextField('text',
+        required=False,
+        searchable=True,
+        storage = atapi.AnnotationStorage(migrate=True),
+        validators = ('isTidyHtmlWithCleanup',),
+        #validators = ('isTidyHtml',),
+        default_output_type = 'text/x-html-safe',
+        widget = atapi.RichWidget(
+            i18n_domain='upc.genweb.kbpuc',
+            label=_(u'label_procediment', default=u'Procediment'),
+            rows = 25,
+            allow_file_upload = zconf.ATDocument.allow_document_upload),
+        schemata="default",
+    ),
+
+    atapi.StringField(
+        name = 'registro_p',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = 'getRegistro_p',        
+        widget = atapi.StringWidget(
+            label = _(u'label_height', default=u'Registro'),
+            i18n_domain='upc.genweb.kbpuc',
+            visible = {'edit': 'hidden'}
+        ),
+        schemata="default",
+    ),
+
 ))
 
 schemata.finalizeATCTSchema(procediment_kbpuc_Schema, moveDiscussion=False)
+
+procediment_kbpuc_Schema.changeSchemataForField('subject', 'default')
+procediment_kbpuc_Schema.moveField('subject', after='title')
+
+procediment_kbpuc_Schema.moveField('text', after='equip')
+
+procediment_kbpuc_Schema.changeSchemataForField('relatedItems', 'default')
+procediment_kbpuc_Schema.moveField('relatedItems', after='registro_p')
+procediment_kbpuc_Schema['description'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
 
 class Procediment(ATDocument):
     """FAQ KBPUC """
@@ -39,6 +132,29 @@ class Procediment(ATDocument):
     schema = procediment_kbpuc_Schema
 
     implements(IProcediment)
+
+    security = ClassSecurityInfo()
+
+    security.declarePublic('getProducteVocabulary')
+    def getProducteVocabulary(self):            
+        return ['Gestió de personal','Gestió','personal']
+
+    security.declarePublic('getTipusDocument')
+    def getTipusDocument(self):
+        return ['RIN','AUS','PTI']
+
+    security.declarePublic('getEquip')
+    def getEquip(self):
+        return ['BO','FO','PT']
+
+    security.declarePublic('getRegistro_p')
+    def getRegistro_p(self):
+        cadena = self.registro_p
+        portal_membership = getToolByName(self, 'portal_membership')
+        user = portal_membership.getAuthenticatedMember().getUserName()
+        fecha = datetime.now().ctime()
+        cadena = cadena + ' ' + user + ' ' + fecha + '@'
+        return cadena
 
 atapi.registerType(Procediment, PROJECTNAME)
 

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <object name="Categoria"
-        meta_type="Factory-based Type Information with dynamic views"
-        xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-   
+   meta_type="Factory-based Type Information with dynamic views"
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Categoria</property>
  <property name="description"></property>
  <property name="content_icon">++resource++logosfooter_icon.gif</property>
@@ -11,10 +10,12 @@
  <property name="factory">addCategoria</property>
  <property name="immediate_view">atct_edit</property>
  <property name="global_allow">True</property>
- <property name="filter_content_types">False</property>
+ <property name="filter_content_types">True</property>
  <property name="allowed_content_types">
+  <element value="Faq"/>
+  <element value="InfoGeneral"/>
+  <element value="Procediment"/>
  </property>
-
  <property name="allow_discussion">False</property>
  <property name="default_view">view</property>
  <property name="view_methods">

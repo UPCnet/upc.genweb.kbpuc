@@ -23,6 +23,9 @@ from upc.genweb.kbpuc.interfaces import IInfoGeneral
 from upc.genweb.kbpuc.config import PROJECTNAME
 from zope.component import getMultiAdapter, getUtility
 
+from datetime import datetime
+
+
 from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocument
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
@@ -84,6 +87,21 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         schemata="default",
     ),
 
+    atapi.StringField(
+        name = 'registro',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = "getRegistro",        
+        widget = atapi.StringWidget(
+            label = _(u'label_height', default=u'registro'),
+            i18n_domain='upc.genweb.kbpuc',
+#            visible = {'view':'hidden', 'edit': 'hidden'}
+        ),
+        schemata="default",
+    ),
+
+
 ))
 
 schemata.finalizeATCTSchema(infogeneral_kbpuc_Schema, moveDiscussion=False)
@@ -115,6 +133,15 @@ class InfoGeneral(ATDocument):
     security.declarePublic('getCategoria')
     def getCategoria(self):
         return self.getParentNode().title
+
+    security.declarePublic('getRegistro')
+    def getRegistro(self):
+        cadena = self.registro
+        portal_membership = getToolByName(self, 'portal_membership')
+        user = portal_membership.getAuthenticatedMember().getUserName()
+        fecha = datetime.now().ctime()
+        cadena = cadena + ' ' + user + ' ' + fecha + '@'
+        return cadena
         
 atapi.registerType(InfoGeneral, PROJECTNAME)
 

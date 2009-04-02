@@ -86,6 +86,60 @@
                        />
             </div>
 
+<!-- PRODUCTE -->
+
+
+            <div class="field">
+                <label for="Subject" i18n:translate="label_categories">Producte</label>
+
+                <div class="formHelp" i18n:translate="help_search_categories">
+                Return items matching some or all of these Categories.
+                Multiple words may be found by pressing <strong>Ctrl</strong>
+                (or <strong>Apple</strong> key on Mac) while clicking the
+                keywords.
+                </div>
+
+                <select name="Subject:list"
+                        id="Subject"
+                        size="7"
+                        multiple="multiple"
+                        tal:define="contentSubjects python: view.getProducte;
+                                    usedSubjects python: view.getProducte;"
+                        >
+                    <option value="#"
+                            tal:repeat="subject usedSubjects"
+                            tal:content="subject/Title"
+                            tal:attributes="value subject"
+                            i18n:domain="plone-metadata"
+                            i18n:translate=""
+                            >dummy</option>
+                </select>
+                <br />
+
+                <input type="radio"
+                       name="Subject_usage:ignore_empty"
+                       id="Subject_or"
+                       value=""
+                       class="noborder"
+                       tal:attributes="checked python:1"/>
+                    <label for="Subject_or" i18n:translate="description_subject_or">
+                        Match any
+                    </label>
+                    <br />
+
+                <input type="radio"
+                        name="Subject_usage:ignore_empty"
+                        id="Subject_and"
+                        value="operator:and"
+                        class="noborder"
+                        tal:attributes="checked python:0"/>
+                <label for="Subject_and" i18n:translate="description_subject_and">
+                    Match all
+                </label>
+            </div>
+
+<!-- CATEGORIAS -->
+
             <div class="field">
                 <label for="Subject" i18n:translate="label_categories">Categories</label>
 
@@ -150,35 +204,7 @@
                        size="25"
                        />
             </div>
-    
-            <div class="field">
-                <label for="created" i18n:translate="label_new_items_since">New items since</label>
-
-                <div class="formHelp" i18n:translate="help_search_new_items_since">
-                Return items added since you were last logged on, the last week, etc.
-                </div>
-    
-                <tal:datetime define="today python:DateTime().earliestTime()">
-                <select name="created:list:date"
-                        id="created"
-                        tal:define="yesterday python:(today-1).Date();
-                                    lastweek python:(today-7).Date();
-                                    lastmonth python:(today-31).Date();
-                                    ever string:1970/02/01;">
-                    <option value="#"
-                            tal:condition="not: isAnon"
-                            tal:attributes="value python:member is not None and member.getProperty('last_login_time') or today"
-                            i18n:translate="last_login">Last log-in</option>
-                    <option value="#" tal:attributes="value yesterday" i18n:translate="time_yesterday"> Yesterday </option>
-                    <option value="#" tal:attributes="value lastweek" i18n:translate="time_last_week"> Last week </option>
-                    <option value="#" tal:attributes="value lastmonth" i18n:translate="time_last_month"> Last month </option>
-                    <option value="#" tal:attributes="value ever" selected="selected" i18n:translate="time_ever"> Ever </option>
-                </select>
-                </tal:datetime>
-
-                <input type="hidden" name="created_usage" value="range:min" />
-            </div>
-    
+            
             <div class="field" tal:define="portal_types portal/portal_types;">
                 <label i18n:translate="label_item_type">Item type</label>
 
@@ -201,8 +227,8 @@
                 </span>
                 <br />
                 <div style="float:left; margin-right: 2em;"
-                     tal:define="allTypes python:putils.getUserFriendlyTypes();
-                             typeLists python:here.createMultiColumnList(allTypes, numCols=2, sort_on='self');"
+                     tal:define="allTypes view/getFriendlyKbpuctypes;
+                                 typeLists python:here.createMultiColumnList(allTypes, numCols=5, sort_on='self');"
                      tal:repeat="sublist typeLists">
                     <tal:items repeat="type sublist">
                     <input type="checkbox"
@@ -220,78 +246,6 @@
                     <br />
                     </tal:items>
                 </div>
-            </div>
-
-            <div class="visualClear" id="clear-space-before-author"><!-- --></div>
-            <br />
-
-            <div class="field">
-                <label for="Creator" i18n:translate="label_author">Author</label>
-
-                <div class="formHelp" i18n:translate="help_search_author">
-                Return items created by a particular person.
-                </div>
-    
-                <tal:creators tal:define="creators python:portal.portal_catalog.uniqueValuesFor('Creator')">
-                    <select name="Creator"
-                            id="Creator"
-                            tal:condition="python: len(creators) &lt;= 30">
-                        <option value="" i18n:translate="label_any_author">Any Author</option>
-                        <metal:block tal:repeat="creator creators">
-                            <option value="" tal:attributes="value creator" tal:content="creator"> username </option>
-                        </metal:block>
-                    </select>
-    
-                    <input name="Creator"
-                           tal:condition="python: len(creators) &gt; 30 " />
-                </tal:creators>
-            </div>
-    
-            <div class="field">
-    
-                <label for="review_state" i18n:translate="label_review_status">Review status</label>
-
-                <div class="formHelp" i18n:translate="help_search_review_status">
-                You may search for items based on their
-                review state. If you wish to constrain results to items
-                in certain states, select them from this list.
-                </div>
-    
-                <span class="optionsToggle">
-                <input type="checkbox"
-                       onclick="javascript:toggleSelect(this, 'review_state:list', true);"
-                       name="rs_toggle"
-                       value="#"
-                       id="rs_toggle"
-                       class="noborder"
-                       checked="checked" />
-                <label for="rs_toggle"
-                       i18n:translate="label_toggle"
-                       >Select All/None
-                </label>
-                <br />
-                </span>
-
-                <tal:states define="
-                                navtree_props portal_properties/navtree_properties;
-                                states          python:wtool.listWFStatesByTitle(filter_similar=1);
-                                state_lists     python: here.createMultiColumnList(states, numCols=1, sort_on='self');"
-                            repeat="sublist state_lists">
-                    <tal:items repeat="state sublist">
-                    <input class="noborder"
-                           type="checkbox"
-                           name="review_state:list"
-                           checked="checked"
-                           tal:attributes="value python:state[1];
-                                           id python:normalizeString(state[1]);" />
-                    <label for=""
-                           tal:attributes="for python:normalizeString(state[1])"
-                           i18n:translate=""
-                           tal:content="python:state[0] or state[1]"
-                           />
-                    <br />
-                    </tal:items>
-                </tal:states>
             </div>
 
             <div class="visualClear" id="clear-space-before-submit"><!-- --></div>

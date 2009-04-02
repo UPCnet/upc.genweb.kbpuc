@@ -23,3 +23,16 @@ class ServeiView(BrowserView):
 class cercaServeis(BrowserView):
     __call__ = ViewPageTemplateFile('cerca-serveis.pt')
 
+    def getFriendlyKbpuctypes(self):
+        return ['Servei','Faq','Categoria','Procediment','InfoGeneral']
+   
+    def getProducte(self):
+        """Return a list of metadata fields from portal_catalog.
+        """
+        portal_catalog = getToolByName(self, 'portal_catalog')
+        mt = portal_catalog.searchResults(portal_type = 'Procediment',review_state='published')
+        new_list=[]
+        for f in mt:
+            new_list.append(f.getProducte)
+        return new_list
+

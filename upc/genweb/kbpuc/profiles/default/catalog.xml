@@ -27,5 +27,10 @@
  </index>
  <column value="getCategoria"/>  
 
+ <index name="getProducte" meta_type="FieldIndex">
+    <indexed_attr value="getProducte"/>
+ </index>
+ <column value="getProducte"/>  
+
 </object>
 

@@ -45,7 +45,7 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
     ),
 
     atapi.LinesField(
-        name='producte_p',
+        name='producte',
         widget=atapi.MultiSelectionWidget(
             format="select",
             label = _(u'label_producte', default=u'Producte'),

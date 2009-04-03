@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-"""Definition of the faq content type
+"""Definition of the Procediment content type
 """
 
 from zope.interface import implements, directlyProvides
@@ -26,6 +26,8 @@ from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocumen
 from datetime import datetime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+
+from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
@@ -54,8 +56,9 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         languageIndependent=True,
         multiValued=False,
         schemata="default",
-        vocabulary='getProducteVocabulary',
+        vocabulary=NamedVocabulary('producte_vocabulary'),
         enforceVocabulary = True,
+        
     ),
 
     atapi.StringField(
@@ -67,13 +70,13 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
             i18n_domain='upc.genweb.kbpuc',
         ),
         languageindependent=True,
-        vocabulary='getTipusDocument',
+        vocabulary=NamedVocabulary('tipus_vocabulary'),
         schemata="default",
     ),
 
     atapi.LinesField('equip',
         required=False,
-        vocabulary='getEquip',
+        vocabulary=NamedVocabulary('equips_vocabulary'),
         enforceVocabulary=True,
         widget=atapi.InAndOutWidget(
             label="Equips a qui assignar el tiquet",
@@ -126,7 +129,7 @@ procediment_kbpuc_Schema.moveField('relatedItems', after='registro_p')
 procediment_kbpuc_Schema['description'].widget.visible = {'edit': 'invisible', 'view': 'invisible'}
 
 class Procediment(ATDocument):
-    """FAQ KBPUC """
+    """Procediment KBPUC """
 
     portal_type = "Procediment"
     schema = procediment_kbpuc_Schema
@@ -134,18 +137,6 @@ class Procediment(ATDocument):
     implements(IProcediment)
 
     security = ClassSecurityInfo()
-
-    security.declarePublic('getProducteVocabulary')
-    def getProducteVocabulary(self):            
-        return ['Gestió de personal','Gestió','personal']
-
-    security.declarePublic('getTipusDocument')
-    def getTipusDocument(self):
-        return ['RIN','AUS','PTI']
-
-    security.declarePublic('getEquip')
-    def getEquip(self):
-        return ['BO','FO','PT']
 
     security.declarePublic('getRegistro_p')
     def getRegistro_p(self):

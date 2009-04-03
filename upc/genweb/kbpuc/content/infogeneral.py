@@ -135,12 +135,18 @@ class InfoGeneral(ATDocument):
 
     security.declarePublic('getRegistro')
     def getRegistro(self):
+        if self.registro == '':
+            cadena = []
         cadena = self.registro
         portal_membership = getToolByName(self, 'portal_membership')
         user = portal_membership.getAuthenticatedMember().getUserName()
         fecha = datetime.now().ctime()
         cadena = cadena + ' ' + user + ' ' + fecha + '@'
         return cadena
+
+    def getTexto(self, str):
+        nuevo = str.split('@')
         
+       
 atapi.registerType(InfoGeneral, PROJECTNAME)
 

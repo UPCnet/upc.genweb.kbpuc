@@ -13,11 +13,18 @@
 
       <metal:main_macro define-macro="main">
 
+
+
         <metal:header_macro define-macro="header"
                             tal:define="kssClassesView context/@@kss_field_decorator_view;
                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable">
 
           <div tal:replace="structure provider:plone.abovecontenttitle" />
+     
+
+
+
+     
           
           <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
               Title or id
@@ -25,7 +32,11 @@
     
           <div tal:replace="structure provider:plone.belowcontenttitle" />
         </metal:header_macro>
-skjhfsdajkfh
+
+            <div metal:use-macro="here/document_relateditems/macros/relatedItems">
+                show related items if they exist
+            </div>
+
         <metal:body_macro metal:define-macro="body">
           <div tal:replace="structure provider:plone.abovecontentbody" />
 

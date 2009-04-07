@@ -5,6 +5,11 @@
 
     <include package="plone.app.contentmenu" />
 
+    <browser:resourceDirectory
+        name="upc.genweb.kbpuc.images"
+        directory="images"
+        />
+
     <browser:page
         for="..interfaces.IServei"
         name="view"
@@ -89,6 +94,7 @@
         template="cerca-serveis.pt"
         permission="zope2.View"
         />
+        
 
 </configure>
 

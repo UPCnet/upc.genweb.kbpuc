@@ -1,77 +1,85 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="here/main_template/macros/master">
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
 
-  <head><title></title></head>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+           tal:define="kssClassesView context/@@kss_field_decorator_view;
+                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                       templateId template/getId;
+                       text here/getText;">
 
-  <body>
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-    <div metal:fill-slot="main">
+        <h1 class="documentFirstHeading"> 
+            <metal:field use-macro="python:here.widget('title', mode='view')">
+            Title
+            </metal:field>
+        </h1>
 
-      <metal:main_macro define-macro="main">
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+
+        <p class="documentDescription">
+            <metal:field use-macro="python:here.widget('description', mode='view')">
+            Description
+            </metal:field>
+        </p>
+
+        <div tal:replace="structure provider:plone.abovecontentbody" />
+
+        <p tal:condition="python: not text and is_editable"
+           i18n:translate="no_body_text"
+           class="discreet">
+            This item does not have any body text, click the edit tab to change it.
+        </p>
 
 
+        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Informació d'entrada</h4>
+        <metal:field use-macro="python:here.widget('informacio', mode='view')">
+        	Informació
+        </metal:field>
 
-        <metal:header_macro define-macro="header"
-                            tal:define="kssClassesView context/@@kss_field_decorator_view;
-                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable">
+		<h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Procediment:</h4>
+        <metal:field use-macro="python:here.widget('text', mode='view')">
+        Body text
+        </metal:field>
 
-          <div tal:replace="structure provider:plone.abovecontenttitle" />
-     
+        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Productes Relacionats:</h4>
+        <metal:field use-macro="python:here.widget('producte', mode='view')">
+        	Producte
+        </metal:field>
+        
+        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Tipus de document:</h4>
+        <metal:field use-macro="python:here.widget('tipus_document', mode='view')">
+        	Tipus
+        </metal:field>
+        
+		<h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Equips a qui assignar el tiquet:</h4>
+        <metal:field use-macro="python:here.widget('equip', mode='view')">
+        	Equips
+        </metal:field>
 
+        <div metal:use-macro="here/document_relateditems/macros/relatedItems">
+            show related items if they exist
+        </div>
+        
+        
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+        
+		<h2 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</h2>
+		<metal:field use-macro="python:here.widget('registro_p', mode='view')">
+        	Registro
+        </metal:field>
+		 
 
+    </tal:main-macro>
 
-     
-          
-          <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">
-              Title or id
-          </h1>
-    
-          <div tal:replace="structure provider:plone.belowcontenttitle" />
-        </metal:header_macro>
+</metal:main>
 
-            <div metal:use-macro="here/document_relateditems/macros/relatedItems">
-                show related items if they exist
-            </div>
-
-        <metal:body_macro metal:define-macro="body">
-          <div tal:replace="structure provider:plone.abovecontentbody" />
-
-          <tal:fields tal:define="field_macro field_macro | here/widgets/field/macros/view"
-                      tal:repeat="field python:here.Schema().filterFields(isMetadata=0)">
-
-            <tal:if_visible define="mode string:view;
-                                    visState python:field.widget.isVisible(here, mode);
-                                    visCondition python:field.widget.testCondition(context.aq_inner.aq_parent, portal, context);"
-                            condition="python:visState == 'visible' and visCondition">
-              <metal:use_field use-macro="field_macro" />
-            </tal:if_visible>
-          </tal:fields>
-        </metal:body_macro>
-
-        <metal:folderlisting_macro metal:define-macro="folderlisting"
-                                   tal:define="fl_macro here/folder_listing/macros/listing | nothing;
-                                               folderish here/isPrincipiaFolderish | nothing;">
-            <tal:if_folderlisting condition="python:folderish and fl_macro">
-                <metal:use_macro use-macro="fl_macro" />
-            </tal:if_folderlisting>
-        </metal:folderlisting_macro>
-
-        <metal:footer_macro define-macro="footer">
-            <div metal:use-macro="here/document_relateditems/macros/relatedItems">
-                show related items if they exist
-            </div>
-    
-            <div tal:replace="structure provider:plone.belowcontentbody" />
-        </metal:footer_macro>
-
-      </metal:main_macro>
-
-    </div>
-
-  </body>
-
+</body>
 </html>

@@ -40,8 +40,5 @@ class Servei(ATFolder):
 
     implements(IServei)
 
-    def getColectius(self):
-        return ['EST','PAS','PDI']
-
 atapi.registerType(Servei, PROJECTNAME)
 

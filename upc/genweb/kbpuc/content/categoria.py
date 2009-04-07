@@ -39,6 +39,12 @@ class Categoria(ATFolder):
     schema = categoria_kbpuc_Schema
 
     implements(ICategoria)
+    
+    security = ClassSecurityInfo()
+       
+    security.declarePublic('getCategoria')
+    def getCategoria(self):
+        return self.getParentNode().title
 
 atapi.registerType(Categoria, PROJECTNAME)
 

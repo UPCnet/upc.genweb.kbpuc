@@ -16,7 +16,6 @@
         <metal:header_macro define-macro="header"
                             tal:define="kssClassesView context/@@kss_field_decorator_view;
                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable">
-
           <div tal:replace="structure provider:plone.abovecontenttitle" />
           
           <h1 metal:use-macro="here/kss_generic_macros/macros/generic_title_view">

@@ -3,7 +3,7 @@
  <import-step id="upc.genweb.kbpuc.various"
                version="20090403-01"
                handler="upc.genweb.kbpuc.setuphandlers.setupVarious"
-               title="genWeb UPC: miscellaneous import steps">
+               title="genWeb KBPUC: miscellaneous import steps">
     <dependency step="various" />
     Various import steps that are not handled by GS import/export handlers.
  </import-step>  

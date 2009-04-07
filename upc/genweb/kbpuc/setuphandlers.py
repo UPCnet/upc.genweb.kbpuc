@@ -17,10 +17,12 @@ def setupVarious(context):
     voctool = getToolByName(portal, 'portal_vocabularies')
     try:
         producte_vocabulary = _createObjectByType('SimpleVocabulary', voctool, 'producte_vocabulary')
-        keywords = [ (u"Intranet", u"30400 - Servei Intranet UPCnet"),
-                     (u"Genweb", u"30430 - Servei de GenWeb 3.0"),
-                     (u"Correu", u"23233 - Correu K2"),
-                     (u"Xarxa", u"99999 - Xarxa Troncal UPC"),
+        keywords = [ (u"DRAC-Curriculum", u"DRAC-Curriculum"),
+                     (u"DRAC-Activitats", u"DRAC-Activitats"),
+                     (u"DRAC-Consultes", u"DRAC Consultes Generals"),
+                     (u"Fenix ", u"Fenix"),
+                     (u"Directori ", u"Directori/Intranet"),
+                     (u"Sense", u"Sense servei"),
                      ]
         for keyword in keywords:
             object = _createObjectByType('SimpleVocabularyTerm', producte_vocabulary, keyword[0])
@@ -33,11 +35,14 @@ def setupVarious(context):
 
     try:
         equips_vocabulary = _createObjectByType('SimpleVocabulary', voctool, 'equips_vocabulary')
-        typologies = [ (u"bo-aps", u"BackOffice Aplicacions i Serveis Finals"),
-                       (u"bo-inf", u"BackOffice Infrastructures"),
-                       (u"bo-mirr", u"BackOffice Monitorització i Resposta Ràpida"),
-                       (u"pt", u"Projectes Tecnològics"),
-                       (u"fo", u"FrontOffice"),
+        typologies = [ (u"ATIC", u"ATIC"),
+                       (u"DRAC-1", u"Suport DRAC 1er nivell"),
+                       (u"DRAC-OTRDI", u"Suport DRAC 2on nivell (OTRDI)"),
+                       (u"DRAC-CTT", u"Suport DRAC 2on nivell (CTT)"),
+                       (u"DRAC-SP", u"Suport DRAC 2on nivell (SP)"),
+                       (u"DRAC-CTT", u"Suport DRAC 2on nivell (CTT)"),                       
+                       (u"DRAC-Biblioteques", u"Suport DRAC 2on nivell (Biblioteques)"),
+                       (u"PS", u"Projectes software"),
                        ]
         for typology in typologies:
             object = _createObjectByType('SimpleVocabularyTerm', equips_vocabulary, typology[0])
@@ -49,9 +54,9 @@ def setupVarious(context):
     
     try:
         tipus_vocabulary = _createObjectByType('SimpleVocabulary', voctool, 'tipus_vocabulary')
-        typologies = [ (u"RIN", u"RIN - Resoldre Incidències"),
-                       (u"AUS", u"AUS - Atendre usuaris"),
-                       (u"PTI", u"PTI - Petició"),
+        typologies = [ (u"RIN", u"RIN-Resoldre Incidències"),
+                       (u"AUS", u"AUS-Atendre usuaris"),
+                       (u"PTI", u"PTI-Petició"),
                        ]
         for typology in typologies:
             object = _createObjectByType('SimpleVocabularyTerm', tipus_vocabulary, typology[0])

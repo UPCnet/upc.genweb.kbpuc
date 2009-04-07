@@ -25,10 +25,11 @@ from zope.component import getMultiAdapter, getUtility
 
 from datetime import datetime
 
-
 from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocument
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
+
+from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
@@ -41,7 +42,7 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         default_output_type = 'text/x-html-safe',
         widget = atapi.RichWidget(
             i18n_domain='upc.genweb.kbpuc',
-            label=_(u'label_long_description', default=u'Contingut'),
+            label=_(u'label_info_contingut', default=u'Contingut'),
             rows = 25,
             allow_file_upload = zconf.ATDocument.allow_document_upload),
         schemata="default",
@@ -52,12 +53,13 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         widget=atapi.MultiSelectionWidget(
             format="select",
             label = _(u'label_producte', default=u'Producte'),
+            description = _(u'label_producte_descr', default=u'Seleccionar el producte o productes relacionats'),
             i18n_domain='upc.genweb.kbpuc',
         ),
         languageIndependent=True,
         multiValued=False,
         schemata="default",
-        vocabulary='getProducteVocabulary',
+        vocabulary=NamedVocabulary('producte_vocabulary'),
         enforceVocabulary = True,
     ),
 
@@ -70,6 +72,7 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         widget = atapi.StringWidget(
             label = _(u'label_servei', default=u'Servei'),
             i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
         ),
         schemata="default",
     ),
@@ -83,6 +86,7 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         widget = atapi.StringWidget(
             label = _(u'label_categoria', default=u'Categoria'),
             i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
         ),
         schemata="default",
     ),
@@ -96,7 +100,7 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         widget = atapi.StringWidget(
             label = _(u'label_height', default=u'Registro'),
             i18n_domain='upc.genweb.kbpuc',
-            visible = {'edit': 'hidden'}
+            visible = {'view': 'hidden','edit': 'hidden'}
         ),
         schemata="default",
     ),
@@ -106,10 +110,10 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 schemata.finalizeATCTSchema(infogeneral_kbpuc_Schema, moveDiscussion=False)
 
 infogeneral_kbpuc_Schema.changeSchemataForField('subject', 'default')
-infogeneral_kbpuc_Schema.moveField('subject', after='title')
+infogeneral_kbpuc_Schema.moveField('subject', after='text')
 
 infogeneral_kbpuc_Schema.changeSchemataForField('relatedItems', 'default')
-infogeneral_kbpuc_Schema.moveField('relatedItems', after='text')
+infogeneral_kbpuc_Schema.moveField('relatedItems', after='subject')
 
 class InfoGeneral(ATDocument):
     """InfoGeneral KBPUC """
@@ -120,10 +124,6 @@ class InfoGeneral(ATDocument):
     implements(IInfoGeneral)
     
     security = ClassSecurityInfo()
-
-    security.declarePublic('getProducteVocabulary')
-    def getProducteVocabulary(self):            
-        return ['Gestió de personal','Gestió','personal']
 
     security.declarePublic('getServei')
     def getServei(self):

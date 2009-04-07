@@ -34,11 +34,10 @@ faq_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
                 vocabulary='listaServicios',
                 enforceVocabulary=True,
                 widget=atapi.InAndOutWidget(
-                        label="Lista de Servicios",
-                        label_msgid="label_custom_view_fields",
-                        description="Select which fields to display when "
-                        "'Display as Table' is checked.",
-                        description_msgid="help_custom_view_fields",
+                        label="Llista de Serveis",
+                        label_msgid="upc.genweb.kbpuc.llista_serveis",
+                        description="Seleccionar els serveis de la llista.",
+                        description_msgid="upc.genweb.kbpuc.llista_serveis_descr",
                         i18n_domain = "upc.genweb.kbpuc"),
      ),
 

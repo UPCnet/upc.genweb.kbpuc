@@ -1,52 +1,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
       xmlns:tal="http://xml.zope.org/namespaces/tal"
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-      metal:use-macro="here/main_template/macros/master">
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="plone">
+<body>
 
-  <head><title></title></head>
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main"
+           tal:define="kssClassesView context/@@kss_field_decorator_view;
+                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
+                       templateId template/getId;
+                       text here/getText;">
 
-  <body>
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-    <div metal:fill-slot="main">
+        <h1 class="documentFirstHeading"> 
+            <metal:field use-macro="python:here.widget('title', mode='view')">
+            Title
+            </metal:field>
+        </h1>
 
-      <metal:main_macro define-macro="main">
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
 
-      <div tal:replace="structure provider:plone.abovecontenttitle" />
+        <p class="documentDescription">
+            <metal:field use-macro="python:here.widget('description', mode='view')">
+            Description
+            </metal:field>
+        </p>
 
+        <div tal:replace="structure provider:plone.abovecontentbody" />
 
-      <div class="agendaContingut contacte" style="padding: 5px;">
+        <p tal:condition="python: not text and is_editable"
+           i18n:translate="no_body_text"
+           class="discreet">
+            This item does not have any body text, click the edit tab to change it.
+        </p>
 
-      <h5 style="font-family: Arial,Helvetica,Verdana,sans-serif; font-size: 14px;" tal:content="here/Title"> Servei de Comunicació i Promoció</h5>
-      </div>
+        <metal:field use-macro="python:here.widget('text', mode='view')">
+        Body text
+        </metal:field>
 
-      <div tal:content="structure here/Description">Comment</div>
-      <br>
-      <div tal:content="here/getProducte">Comment</div>
+        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Productes Relacionats:</h4>
+        <metal:field use-macro="python:here.widget('producte', mode='view')">
+        	Producte
+        </metal:field>
 
-      <div tal:content="here/getServei">Comment</div>
-      
-      <div tal:content="here/getCategoria">Comment</div>   
-
-      <div tal:content="here/getRegistro">Comment</div>  
-      
-      <br>
-
-      <div tal:content="structure here/getText">Comment</div>
+        <div metal:use-macro="here/document_relateditems/macros/relatedItems">
+            show related items if they exist
+        </div>
         
-      <metal:footer_macro define-macro="footer">
-          <div metal:use-macro="here/document_relateditems/macros/relatedItems">
-              show related items if they exist
-          </div>
-  
-          <div tal:replace="structure provider:plone.belowcontentbody" />
-      </metal:footer_macro>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
 
-      </metal:main_macro>
+		<h2 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</h2>
+		<metal:field use-macro="python:here.widget('registro', mode='view')">
+        	Registro
+        </metal:field>
+        
+    </tal:main-macro>
 
-    </div>
+</metal:main>
 
-  </body>
-
+</body>
 </html>

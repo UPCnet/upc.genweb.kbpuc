@@ -3,8 +3,8 @@
    meta_type="Factory-based Type Information with dynamic views"
    xmlns:i18n="http://xml.zope.org/namespaces/i18n">
  <property name="title">Categoria</property>
- <property name="description"></property>
- <property name="content_icon">++resource++logosfooter_icon.gif</property>
+ <property name="description" i18n:translate="">Document del tipus Categoria del Servei.</property>
+ <property name="content_icon">++resource++upc.genweb.kbpuc.images/servei_categoria_icon.gif</property>
  <property name="content_meta_type">Categoria</property>
  <property name="product">upc.genweb.kbpuc</property>
  <property name="factory">addCategoria</property>

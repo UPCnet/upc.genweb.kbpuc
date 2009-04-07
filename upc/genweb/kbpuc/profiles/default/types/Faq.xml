@@ -4,8 +4,8 @@
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
  <property name="title">FAQ</property>
- <property name="description"></property>
- <property name="content_icon">++resource++logosfooter_icon.gif</property>
+ <property name="description" i18n:translate="">FAQ descriptiva.</property>
+ <property name="content_icon">++resource++upc.genweb.kbpuc.images/servei_faq_icon.gif</property>
  <property name="content_meta_type">Faq</property>
  <property name="product">upc.genweb.kbpuc</property>
  <property name="factory">addFaq</property>

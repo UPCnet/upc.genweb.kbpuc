@@ -4,8 +4,8 @@
         xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
  <property name="title">InfoGeneral</property>
- <property name="description"></property>
- <property name="content_icon">++resource++logosfooter_icon.gif</property>
+ <property name="description" i18n:translate="">Document d'informació general.</property>
+ <property name="content_icon">++resource++upc.genweb.kbpuc.images/servei_info_icon.gif</property>
  <property name="content_meta_type">InfoGeneral</property>
  <property name="product">upc.genweb.kbpuc</property>
  <property name="factory">addInfoGeneral</property>

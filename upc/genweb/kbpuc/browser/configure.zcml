@@ -5,6 +5,16 @@
 
     <include package="plone.app.contentmenu" />
 
+<!-- utility del theme -->
+    <adapter factory=".controlpanel.KbpucControlPanelAdapter" />
+
+    <browser:page
+      name="kbpuc-controlpanel"
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      class=".controlpanel.KbpucControlPanel"
+      permission="cmf.ManagePortal"
+      />
+
     <browser:resourceDirectory
         name="upc.genweb.kbpuc.images"
         directory="images"

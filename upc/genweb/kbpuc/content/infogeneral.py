@@ -29,7 +29,7 @@ from Products.ATContentTypes.content.document import ATDocumentSchema, ATDocumen
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+#from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
@@ -59,7 +59,7 @@ infogeneral_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         languageIndependent=True,
         multiValued=False,
         schemata="default",
-        vocabulary=NamedVocabulary('producte_vocabulary'),
+        vocabulary='getProductes',
         enforceVocabulary = True,
     ),
 
@@ -146,7 +146,12 @@ class InfoGeneral(ATDocument):
 
     def getTexto(self, str):
         nuevo = str.split('@')
-        
+
+    def getProductes(self):
+        context = self.context
+        ptool = getToolByName(context, 'portal_properties')
+        kbpucprops = ptool.kbpuc_properties
+        return kbpucprops.Productes.split('\n')
        
 atapi.registerType(InfoGeneral, PROJECTNAME)
 

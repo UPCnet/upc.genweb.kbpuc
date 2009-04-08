@@ -70,12 +70,17 @@
         
         
         <div tal:replace="structure provider:plone.belowcontentbody" />
-        
-		<h2 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</h2>
-		<metal:field use-macro="python:here.widget('registro_p', mode='view')">
-        	Registro
-        </metal:field>
-		 
+
+		<dl class="collapsible inline collapsedOnLoad">
+		 <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>
+		  <dd class="collapsibleContent">
+		      <ul tal:condition="here/getRegistro_p" tal:repeat="reg here/getRegistro_p">
+        	    <li tal:condition="reg" tal:content="reg">
+        	       Registro
+        	    </li>
+        	  </ul>        	  
+          </dd>
+		</dl>
 
     </tal:main-macro>
 

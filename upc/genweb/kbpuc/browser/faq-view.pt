@@ -30,14 +30,14 @@
 
         <tal:block tal:condition="python: view.eliminaUltimo(here.serviciosEnlace())" tal:repeat="obj python: view.eliminaUltimo(here.serviciosEnlace())">
         <a tal:attributes="href python: obj.getURL()" tal:content="obj/Title"></a>,
-        </tal:block>
+        </tal:block><!--
 
-        <tal:block tal:condition="python: here.serviciosEnlace()[-1]" tal:define="obj  python: here.serviciosEnlace()[-1]">
+        <tal:block tal:condition="python: here.serviciosEnlace()[-1] | nothing" tal:define="obj  python: here.serviciosEnlace()[-1] | nothing">
         <a tal:attributes="href python: obj.getURL()" tal:content="obj/Title"></a>.
         </tal:block>
 
 
-      </metal:main_macro>
+      --></metal:main_macro>
 
     </div>
 

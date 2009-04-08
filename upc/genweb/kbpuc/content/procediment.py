@@ -27,7 +27,7 @@ from datetime import datetime
 
 from Products.ATReferenceBrowserWidget.ATReferenceBrowserWidget import ReferenceBrowserWidget
 
-from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
+#from Products.ATVocabularyManager.namedvocabulary import NamedVocabulary
 
 procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
 
@@ -56,7 +56,7 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         languageIndependent=True,
         multiValued=False,
         schemata="default",
-        vocabulary=NamedVocabulary('producte_vocabulary'),
+        vocabulary='getProductes',
         enforceVocabulary = True,
         
     ),
@@ -65,18 +65,18 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         name='tipus_document',
         required = False,
         widget=atapi.MultiSelectionWidget(
-            label = _(u'tipus_document', default=u'Tipus Document'),
+            label = _(u'tipus_document', default=u'Procés'),
             format = 'checkbox',
             i18n_domain='upc.genweb.kbpuc',
         ),
         languageindependent=True,
-        vocabulary=NamedVocabulary('tipus_vocabulary'),
+        vocabulary='getProcessos',
         schemata="default",
     ),
 
     atapi.LinesField('equip',
         required=False,
-        vocabulary=NamedVocabulary('equips_vocabulary'),
+        vocabulary='getEquips',
         enforceVocabulary=True,
         widget=atapi.InAndOutWidget(
             label="Equips a qui assignar el tiquet",
@@ -144,8 +144,26 @@ class Procediment(ATDocument):
         portal_membership = getToolByName(self, 'portal_membership')
         user = portal_membership.getAuthenticatedMember().getUserName()
         fecha = datetime.now().ctime()
-        cadena = cadena + ' ' + user + ' ' + fecha + '@'
-        return cadena
+        cadena = cadena + ' ' + user + ' ' + fecha + '\n'
+        return cadena.split('\n')
+
+    def getProcessos(self):
+        context = self.context
+        ptool = getToolByName(context, 'portal_properties')
+        kbpucprops = ptool.kbpuc_properties
+        return kbpucprops.Processos.split('\n')
+
+    def getProductes(self):
+        context = self.context
+        ptool = getToolByName(context, 'portal_properties')
+        kbpucprops = ptool.kbpuc_properties
+        return kbpucprops.Productes.split('\n')
+
+    def getEquips(self):
+        context = self.context
+        ptool = getToolByName(context, 'portal_properties')
+        kbpucprops = ptool.kbpuc_properties
+        return kbpucprops.EquipsResolutors.split('\n')
 
 atapi.registerType(Procediment, PROJECTNAME)
 

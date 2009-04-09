@@ -6,7 +6,7 @@
     condition_expr="python:True"
     url_expr="string:${portal_url}/kbpuc-controlpanel"
     visible="True">
-  <permission>Manage portal</permission>
+  <permission>Modify portal content</permission>
   
   Afegim el panell de control de la kbpuc
   

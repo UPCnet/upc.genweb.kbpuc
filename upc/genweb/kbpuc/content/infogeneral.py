@@ -137,16 +137,20 @@ class InfoGeneral(ATDocument):
     def getRegistro(self):
         portal_membership = getToolByName(self, 'portal_membership')
         if self.registro != 'getRegistro':
-            cad = self.registro
             user = portal_membership.getAuthenticatedMember().getUserName()
             fecha = datetime.now().ctime()
-            cad = cad  + user + ' ' + fecha + '@@@'
-        else:
-            cad = ''
-        return [cad for cad in cad.split('@@@') if cad != '']
+            tmp = self.registro
+            tmp = tmp + user + ' ' + fecha + '@@@'
+            return tmp
+        return ''        
 
-    def getTexto(self, str):
-        nuevo = str.split('@')
+    def muestraRegistro(self):
+        cad = self.registro.split('@@@')
+        result = []
+        for i in cad:
+            if i != '':
+                result.append(i)
+        return result
 
     def getProductes(self):
         context = self.context

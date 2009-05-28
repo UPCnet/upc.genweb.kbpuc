@@ -26,12 +26,20 @@ class cercaServeis(BrowserView):
     def getFriendlyKbpuctypes(self):
         return ['Servei','Faq','Categoria','Procediment','InfoGeneral']
    
+    def getProductes(self):
+        context = self.context
+        ptool = getToolByName(context, 'portal_properties')
+        kbpucprops = ptool.kbpuc_properties
+        return kbpucprops.Productes.split('\n')
+
+
     def getProducte(self):
         """Return a list of metadata fields from portal_catalog.
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
         mt = portal_catalog.searchResults(portal_type = 'Procediment',review_state='published')
         new_list=[]
+        import pdb; pdb.set_trace()
         for f in mt:
             new_list.append(f.getProducte)
         return new_list

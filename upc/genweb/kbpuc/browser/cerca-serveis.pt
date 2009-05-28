@@ -13,17 +13,6 @@
 		<div metal:fill-slot="main">
       	<metal:main_macro define-macro="main">
 
-			<script type="text/javascript">
-			function dobusqueda(){
-				new Ajax.Request($('searchajax').action,{
-					method:$('searchajax').method,
-					parameters: $('searchajax').serialize(true),
-					onSuccess: 	function(transport){ 
-			  						$('ajaxresults').innerHTML = transport.responseText;
-		  						}
-				});
-			}    
-			</script>
 
       <div tal:replace="structure provider:plone.abovecontenttitle" />
       <div class="agendaContingut contacte" style="padding: 5px;">
@@ -103,17 +92,17 @@
                         id="Subject"
                         size="7"
                         multiple="multiple"
-                        tal:define="contentSubjects python: view.getProducte;
-                                    usedSubjects python: view.getProducte;"
-                        >
+                        tal:define="productes view/getProductes">
+
                     <option value="#"
-                            tal:repeat="subject usedSubjects"
-                            tal:content="subject/Title"
-                            tal:attributes="value subject"
+                            tal:repeat="p productes"
+                            tal:content="p"
+                            tal:attributes="value p"
                             i18n:domain="plone-metadata"
-                            i18n:translate=""
-                            >dummy</option>
+                            i18n:translate="">
+                    </option>
                 </select>
+
                 <br />
 
                 <input type="radio"

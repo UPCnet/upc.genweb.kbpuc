@@ -140,12 +140,22 @@ class Procediment(ATDocument):
 
     security.declarePublic('getRegistro_p')
     def getRegistro_p(self):
-        cadena = self.registro_p
         portal_membership = getToolByName(self, 'portal_membership')
-        user = portal_membership.getAuthenticatedMember().getUserName()
-        fecha = datetime.now().ctime()
-        cadena = cadena + ' ' + user + ' ' + fecha + '\n'
-        return cadena.split('\n')
+        if self.registro_p != 'getRegistro_p':
+            user = portal_membership.getAuthenticatedMember().getUserName()
+            fecha = datetime.now().ctime()
+            tmp = self.registro_p
+            tmp = tmp + user + ' ' + fecha + '@@@'
+            return tmp
+        return ''
+
+    def muestraRegistro_p(self):
+        cad = self.registro_p.split('@@@')
+        result = []
+        for i in cad:
+            if i != '':
+                result.append(i)
+        return result
 
     def getProcessos(self):
         context = self.context

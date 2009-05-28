@@ -51,12 +51,16 @@
         </div>
 
 
-        <tal:block tal:define="modif here/muestraRegistro">
-            <h4 tal:condition="modif" class="formQuestion" i18n:translate="">Llistat de Modificacions:</h4>
-            <ul tal:condition="modif" tal:repeat="p here/muestraRegistro">
-               <li tal:content="p"></li>
-            </ul>
-        </tal:block>
+        <dl class="collapsible inline collapsedOnLoad">
+         <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>
+          <dd class="collapsibleContent">
+              <ul tal:condition="here/muestraRegistro" tal:repeat="reg here/muestraRegistro">
+            <li tal:condition="reg" tal:content="reg">
+               Registro
+            </li>
+          </ul>        
+         </dd>
+        </dl>
         
     </tal:main-macro>
 

@@ -68,16 +68,16 @@
         <div tal:replace="structure provider:plone.belowcontentbody" />
 
 
-		<dl class="collapsible inline collapsedOnLoad">
-		 <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>
-		  <dd class="collapsibleContent">
-		      <ul tal:condition="here/getRegistro_p" tal:repeat="reg here/getRegistro_p">
-        	    <li tal:condition="reg" tal:content="reg">
-        	       Registro
-        	    </li>
-        	  </ul>        	  
-          </dd>
-		</dl>
+	<dl class="collapsible inline collapsedOnLoad">
+	 <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>
+	  <dd class="collapsibleContent">
+	      <ul tal:condition="here/muestraRegistro_p" tal:repeat="reg here/muestraRegistro_p">
+            <li tal:condition="reg" tal:content="reg">
+               Registro
+            </li>
+          </ul>        	  
+         </dd>
+	</dl>
 
     </tal:main-macro>
 

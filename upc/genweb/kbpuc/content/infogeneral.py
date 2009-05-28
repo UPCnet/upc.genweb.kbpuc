@@ -135,14 +135,15 @@ class InfoGeneral(ATDocument):
 
     security.declarePublic('getRegistro')
     def getRegistro(self):
-        if self.registro == '':
-            cadena = []
-        cadena = self.registro
         portal_membership = getToolByName(self, 'portal_membership')
-        user = portal_membership.getAuthenticatedMember().getUserName()
-        fecha = datetime.now().ctime()
-        cadena = cadena + ' ' + user + ' ' + fecha + '@'
-        return cadena
+        if self.registro != 'getRegistro':
+            cad = self.registro
+            user = portal_membership.getAuthenticatedMember().getUserName()
+            fecha = datetime.now().ctime()
+            cad = cad  + user + ' ' + fecha + '@@@'
+        else:
+            cad = ''
+        return [cad for cad in cad.split('@@@') if cad != '']
 
     def getTexto(self, str):
         nuevo = str.split('@')

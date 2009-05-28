@@ -48,6 +48,7 @@
             </tal:if_folderlisting>
         </metal:folderlisting_macro>
 
+<!--
         <metal:footer_macro define-macro="footer">
             <div metal:use-macro="here/document_relateditems/macros/relatedItems">
                 show related items if they exist
@@ -55,6 +56,7 @@
     
             <div tal:replace="structure provider:plone.belowcontentbody" />
         </metal:footer_macro>
+-->
 
       </metal:main_macro>
 

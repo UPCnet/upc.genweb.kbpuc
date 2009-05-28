@@ -12,22 +12,19 @@
            tal:define="kssClassesView context/@@kss_field_decorator_view;
                        getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
                        templateId template/getId;
-                       text here/getText;">
+                       text here/getText">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
+
         <h1 class="documentFirstHeading"> 
-            <metal:field use-macro="python:here.widget('title', mode='view')">
-            Title
-            </metal:field>
+            <span tal:content="here/Title"></span>
         </h1>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <p class="documentDescription">
-            <metal:field use-macro="python:here.widget('description', mode='view')">
-            Description
-            </metal:field>
+            <span tal:content="here/Description"></span>
         </p>
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
@@ -38,25 +35,28 @@
             This item does not have any body text, click the edit tab to change it.
         </p>
 
-        <metal:field use-macro="python:here.widget('text', mode='view')">
-        Body text
-        </metal:field>
+        <tal:block tal:define="texto here/getText">
+            <div tal:replace="structure texto"></div>
+        </tal:block>
 
-        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Productes Relacionats:</h4>
-        <metal:field use-macro="python:here.widget('producte', mode='view')">
-        	Producte
-        </metal:field>
-
+        <tal:block tal:define="producte here/getProducte">
+            <h4 tal:condition="producte" class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Productes Relacionats:</h4>
+            <ul tal:condition="producte" tal:repeat="p producte">
+               <li tal:content="p"></li>
+            </ul>
+        </tal:block>
+        
         <div metal:use-macro="here/document_relateditems/macros/relatedItems">
             show related items if they exist
         </div>
-        
-        <div tal:replace="structure provider:plone.belowcontentbody" />
 
-		<h2 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</h2>
-		<metal:field use-macro="python:here.widget('registro', mode='view')">
-        	Registro
-        </metal:field>
+
+        <tal:block tal:define="modif here/getRegistro">
+            <h4 tal:condition="modif" class="formQuestion" i18n:translate="">Llistat de Modificacions:</h4>
+            <ul tal:condition="modif" tal:repeat="p modif">
+               <li tal:content="p"></li>
+            </ul>
+        </tal:block>
         
     </tal:main-macro>
 

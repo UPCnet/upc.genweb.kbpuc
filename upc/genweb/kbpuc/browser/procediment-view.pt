@@ -16,18 +16,14 @@
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
 
-        <h1 class="documentFirstHeading"> 
-            <metal:field use-macro="python:here.widget('title', mode='view')">
-            Title
-            </metal:field>
+        <h1 class="documentFirstHeading">
+            <span tal:content="here/Title"></span>
         </h1>
 
         <div tal:replace="structure provider:plone.belowcontenttitle" />
 
         <p class="documentDescription">
-            <metal:field use-macro="python:here.widget('description', mode='view')">
-            Description
-            </metal:field>
+            <span tal:content="here/Description"></span>
         </p>
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
@@ -70,6 +66,7 @@
         
         
         <div tal:replace="structure provider:plone.belowcontentbody" />
+
 
 		<dl class="collapsible inline collapsedOnLoad">
 		 <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>

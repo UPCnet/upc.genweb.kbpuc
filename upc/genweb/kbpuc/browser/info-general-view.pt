@@ -51,7 +51,7 @@
         </div>
 
 
-        <tal:block tal:define="modif here/getRegistro">
+        <tal:block tal:define="modif here/muestraRegistro">
             <h4 tal:condition="modif" class="formQuestion" i18n:translate="">Llistat de Modificacions:</h4>
             <ul tal:condition="modif" tal:repeat="p here/muestraRegistro">
                <li tal:content="p"></li>

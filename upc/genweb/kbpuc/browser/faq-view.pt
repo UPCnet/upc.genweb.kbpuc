@@ -26,18 +26,14 @@
         <span tal:content="structure here/getText">Comment</span> 
 
         <!-- SERVEIS RELACIONATS --> 
-        <h4 tal:condition="python: here.serviciosEnlace()" class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Serveis Relacionats:</h4>
-
-        <tal:block tal:condition="python: view.eliminaUltimo(here.serviciosEnlace())" tal:repeat="obj python: view.eliminaUltimo(here.serviciosEnlace())">
-        <a tal:attributes="href python: obj.getURL()" tal:content="obj/Title"></a>,
-        </tal:block><!--
-
-        <tal:block tal:condition="python: here.serviciosEnlace()[-1] | nothing" tal:define="obj  python: here.serviciosEnlace()[-1] | nothing">
-        <a tal:attributes="href python: obj.getURL()" tal:content="obj/Title"></a>.
+        <tal:block tal:define="serv here/serviciosEnlace">
+        <h4 tal:condition="serv" class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Serveis Relacionats:</h4>
+        <ul tal:repeat="servicios serv">
+            <li><a tal:attributes="href servicios/url" tal:content="servicios/titol"></a></li>
+        </ul>
         </tal:block>
 
-
-      --></metal:main_macro>
+      </metal:main_macro>
 
     </div>
 

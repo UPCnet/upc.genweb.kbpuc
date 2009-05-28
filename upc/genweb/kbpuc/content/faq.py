@@ -68,7 +68,7 @@ class Faq(ATDocument):
         return new_list
 
     def serviciosEnlace(self):
-        serveis = self.listaServicios()
+        serveis = self.servicios
         new = []
         portal_catalog = getToolByName(self, 'portal_catalog')
         mt = portal_catalog.searchResults(portal_type = 'Servei',review_state='published')
@@ -76,7 +76,9 @@ class Faq(ATDocument):
         for i in serveis:
             for j in mt:
                 if i==j.Title:
-                    new.append(j)
+                    new.append(dict(titol = j.Title,
+                                    url = j.getURL()
+                              ))
         return new
 
 

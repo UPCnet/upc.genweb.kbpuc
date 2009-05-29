@@ -34,39 +34,42 @@
             This item does not have any body text, click the edit tab to change it.
         </p>
 
+        <tal:block tal:define="txt here/getInformacio">
+            <h4 tal:condition="txt" class="formQuestion" i18n:translate="">Informació d'entrada</h4>
+            <div tal:condition="txt" tal:content="structure txt">
+            </div>
+        </tal:block>
 
-        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Informació d'entrada</h4>
-        <metal:field use-macro="python:here.widget('informacio', mode='view')">
-        	Informació
-        </metal:field>
-
-		<h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Procediment:</h4>
-        <metal:field use-macro="python:here.widget('text', mode='view')">
-        Body text
-        </metal:field>
-
-        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Productes Relacionats:</h4>
-        <metal:field use-macro="python:here.widget('producte', mode='view')">
-        	Producte
-        </metal:field>
+        <tal:block tal:define="txt here/getText">
+            <h4 tal:condition="txt" class="formQuestion" i18n:translate="">Procediment:</h4>
+            <div tal:condition="txt" tal:content="structure txt">
+            </div>
+        </tal:block>
         
-        <h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Tipus de document:</h4>
-        <metal:field use-macro="python:here.widget('tipus_document', mode='view')">
-        	Tipus
-        </metal:field>
-        
-		<h4 class="formQuestion" i18n:translate="faqTIC_serveis_relacionats">Equips a qui assignar el tiquet:</h4>
-        <metal:field use-macro="python:here.widget('equip', mode='view')">
-        	Equips
-        </metal:field>
+        <tal:block tal:define="prod here/getProducte">
+            <h4 tal:condition="prod" class="formQuestion" i18n:translate="">Productes Relacionats:</h4>
+            <ul tal:condition="prod" tal:repeat="p prod">
+               <li tal:condition="p" tal:content="p"></li>
+            </ul>
+        </tal:block>
+
+        <tal:block tal:define="tipDoc here/getTipus_document">
+            <h4 tal:condition="tipDoc" class="formQuestion" i18n:translate="">Tipus de document:</h4>
+            <ul tal:condition="tipDoc" tal:repeat="p tipDoc">
+               <li tal:condition="p" tal:content="p"></li>
+            </ul>
+        </tal:block>
+
+        <tal:block tal:define="equip here/getEquip">
+            <h4 tal:condition="equip" class="formQuestion" i18n:translate="">Equips a qui assignar el tiquet:</h4>
+            <ul tal:condition="equip" tal:repeat="p equip">
+               <li tal:condition="p" tal:content="p"></li>
+            </ul>
+        </tal:block>
 
         <div metal:use-macro="here/document_relateditems/macros/relatedItems">
             show related items if they exist
         </div>
-        
-        
-        <div tal:replace="structure provider:plone.belowcontentbody" />
-
 
 	<dl class="collapsible inline collapsedOnLoad">
 	 <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>

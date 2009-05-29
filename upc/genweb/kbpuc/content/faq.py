@@ -41,6 +41,21 @@ faq_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
                         i18n_domain = "upc.genweb.kbpuc"),
      ),
 
+    atapi.StringField(
+        name = 'servei',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = "getServei",
+        widget = atapi.StringWidget(
+            label = _(u'label_servei', default=u'Servei'),
+            i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
+        ),
+        schemata="default",
+    ),
+
+
 ))
 
 schemata.finalizeATCTSchema(faq_kbpuc_Schema, moveDiscussion=False)
@@ -80,6 +95,10 @@ class Faq(ATDocument):
                                     url = j.getURL()
                               ))
         return new
+
+    security.declarePublic('getServei')
+    def getServei(self):
+        return self.getParentNode().getParentNode().title
 
 
 atapi.registerType(Faq, PROJECTNAME)

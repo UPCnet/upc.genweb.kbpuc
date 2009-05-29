@@ -37,10 +37,22 @@ class cercaServeis(BrowserView):
         """Return a list of metadata fields from portal_catalog.
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
-        mt = portal_catalog.searchResults(portal_type = 'Procediment',review_state='published')
+        mt = portal_catalog.searchResults(portal_type = 'Procediment')
         new_list=[]
-        import pdb; pdb.set_trace()
         for f in mt:
             new_list.append(f.getProducte)
         return new_list
+
+    def listServ(self):
+        """Return a list of metadata fields from portal_catalog.
+        """
+        portal_catalog = getToolByName(self, 'portal_catalog')
+        mt = portal_catalog.searchResults(portal_type = 'Servei',sort_on='Date')
+        new_list=[]
+        for f in mt:
+            new_list.append(f.Title)
+        new_list.sort()
+        return new_list
+
+
 

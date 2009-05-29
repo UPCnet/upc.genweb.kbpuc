@@ -115,6 +115,20 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         schemata="default",
     ),
 
+    atapi.StringField(
+        name = 'servei',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = "getServei",
+        widget = atapi.StringWidget(
+            label = _(u'label_servei', default=u'Servei'),
+            i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
+        ),
+        schemata="default",
+    ),
+
 ))
 
 schemata.finalizeATCTSchema(procediment_kbpuc_Schema, moveDiscussion=False)
@@ -174,6 +188,10 @@ class Procediment(ATDocument):
         ptool = getToolByName(context, 'portal_properties')
         kbpucprops = ptool.kbpuc_properties
         return kbpucprops.EquipsResolutors.split('\n')
+
+    security.declarePublic('getServei')
+    def getServei(self):
+        return self.getParentNode().getParentNode().title
 
 atapi.registerType(Procediment, PROJECTNAME)
 

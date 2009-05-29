@@ -52,6 +52,7 @@
                        />
             </div>
 
+                <br />
             <div class="field">
                 <label for="Title" i18n:translate="label_title">Title</label>
 
@@ -66,11 +67,102 @@
                        />
             </div>
 
-<!-- PRODUCTE -->
+                <br />
+            <div class="field">
+                <label for="Description" i18n:translate="label_description">Description</label>
+
+                <div class="formHelp" i18n:translate="help_search_description">
+                Return items matching this description.
+                Multiple words may be found
+                by combining them with <strong>AND</strong> and <strong>OR</strong>.
+                </div>
+
+                <input type="text"
+                       id="Description"
+                       name="Description"
+                       size="25"
+                       />
+            </div>
+
+                <br />
+<!-- SERVEI -->
 
 
             <div class="field">
-                <label for="Subject" i18n:translate="label_categories">Producte</label>
+                <label for="Subject" i18n:translate="">Serveis</label>
+
+                <br />
+                <select name="getServei:list"
+                        id="getServei"
+                        size="7"
+                        tal:define="serv view/listServ">
+
+                    <option value="#"
+                            tal:repeat="p serv"
+                            tal:content="p"
+                            tal:attributes="value p"
+                            i18n:domain="plone-metadata"
+                            i18n:translate="">
+                    </option>
+                </select>
+
+                <br />
+
+            </div>
+
+                <br />
+
+<!-- TIPOS DE CONTENIDO -->
+
+            <div class="field" tal:define="portal_types portal/portal_types;">
+                <label i18n:translate="label_item_type">Item type</label>
+
+                <div class="formHelp" i18n:translate="help_search_item_type">
+                Return items of a specific type.
+                </div>
+
+                <span class="optionsToggle">
+                    <input type="checkbox"
+                           onclick="javascript:toggleSelect(this, 'portal_type:list', true);"
+                           name="pt_toggle"
+                           value="#"
+                           id="pt_toggle"
+                           class="noborder"
+                           checked="checked" />
+                    <label for="pt_toggle"
+                           i18n:translate="label_toggle"
+                           >Select All/None
+                    </label>
+                </span>
+                <br />
+                <div style="float:left; margin-right: 2em;"
+                     tal:define="allTypes view/getFriendlyKbpuctypes;
+                                 typeLists python:here.createMultiColumnList(allTypes, numCols=5, sort_on='self');"
+                     tal:repeat="sublist typeLists">
+                    <tal:items repeat="type sublist">
+                    <input type="checkbox"
+                           name="portal_type:list"
+                           value="#"
+                           class="noborder"
+                           checked="checked"
+                           tal:attributes="value type;
+                                           id string:portal_type_${repeat/sublist/number}_${repeat/type/number}"/>
+                    <label for=""
+                           i18n:translate=""
+                           tal:attributes="for string:portal_type_${repeat/sublist/number}_${repeat/type/number}"
+                           tal:content="python: portal_types.getTypeInfo(type).Title()"
+                           />
+                    <br />
+                    </tal:items>
+                </div>
+            </div>
+
+
+                <br />
+                <br />
+<!-- PRODUCTE -->
+            <div class="field">
+                <label for="Subject" i18n:translate="">Producte</label>
 
                 <div class="formHelp" i18n:translate="help_search_categories">
                 Return items matching some or all of these Categories.
@@ -117,6 +209,8 @@
                     Match all
                 </label>
             </div>
+
+                <br />
 
 <!-- CATEGORIAS -->
 
@@ -169,64 +263,6 @@
                 </label>
             </div>
     
-            <div class="field">
-                <label for="Description" i18n:translate="label_description">Description</label>
-
-                <div class="formHelp" i18n:translate="help_search_description">
-                Return items matching this description.
-                Multiple words may be found
-                by combining them with <strong>AND</strong> and <strong>OR</strong>.
-                </div>
-    
-                <input type="text"
-                       id="Description"
-                       name="Description"
-                       size="25"
-                       />
-            </div>
-            
-            <div class="field" tal:define="portal_types portal/portal_types;">
-                <label i18n:translate="label_item_type">Item type</label>
-
-                <div class="formHelp" i18n:translate="help_search_item_type">
-                Return items of a specific type.
-                </div>
-    
-                <span class="optionsToggle">
-                    <input type="checkbox"
-                           onclick="javascript:toggleSelect(this, 'portal_type:list', true);"
-                           name="pt_toggle"
-                           value="#"
-                           id="pt_toggle"
-                           class="noborder"
-                           checked="checked" />
-                    <label for="pt_toggle"
-                           i18n:translate="label_toggle"
-                           >Select All/None
-                    </label>
-                </span>
-                <br />
-                <div style="float:left; margin-right: 2em;"
-                     tal:define="allTypes view/getFriendlyKbpuctypes;
-                                 typeLists python:here.createMultiColumnList(allTypes, numCols=5, sort_on='self');"
-                     tal:repeat="sublist typeLists">
-                    <tal:items repeat="type sublist">
-                    <input type="checkbox"
-                           name="portal_type:list"
-                           value="#"
-                           class="noborder"
-                           checked="checked"
-                           tal:attributes="value type;
-                                           id string:portal_type_${repeat/sublist/number}_${repeat/type/number}"/>
-                    <label for=""
-                           i18n:translate=""
-                           tal:attributes="for string:portal_type_${repeat/sublist/number}_${repeat/type/number}"
-                           tal:content="python: portal_types.getTypeInfo(type).Title()"
-                           />
-                    <br />
-                    </tal:items>
-                </div>
-            </div>
 
             <div class="visualClear" id="clear-space-before-submit"><!-- --></div>
 
@@ -242,10 +278,6 @@
         </fieldset>
     
     </form>
-
-
-
-	  <div id="resultados"></div>
 
   		</metal:main_macro>
 		</div>

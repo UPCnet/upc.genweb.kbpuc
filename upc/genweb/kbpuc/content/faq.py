@@ -60,7 +60,7 @@ class Faq(ATDocument):
         """Return a list of metadata fields from portal_catalog.
         """
         portal_catalog = getToolByName(self, 'portal_catalog')
-        mt = portal_catalog.searchResults(portal_type = 'Servei',sort_on='Date',review_state='published')
+        mt = portal_catalog.searchResults(portal_type = 'Servei',sort_on='Date')
         new_list=[]
         for f in mt:
             new_list.append(f.Title)

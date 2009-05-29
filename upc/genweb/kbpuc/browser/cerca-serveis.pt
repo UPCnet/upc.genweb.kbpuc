@@ -4,25 +4,16 @@
       xmlns:metal="http://xml.zope.org/namespaces/metal"
       xmlns:i18n="http://xml.zope.org/namespaces/i18n"
       metal:use-macro="here/main_template/macros/master"
-      i18n:domain="upc.genweb.kbpuc">
+      i18n:domain="plone">
       
  <head><title></title>
  </head>
  
-	<body>
-		<div metal:fill-slot="main">
+<body>
+	<div metal:fill-slot="main">
       	<metal:main_macro define-macro="main">
 
-
-      <div tal:replace="structure provider:plone.abovecontenttitle" />
-      <div class="agendaContingut contacte" style="padding: 5px;">
-
-      <h5 style="font-family: Arial,Helvetica,Verdana,sans-serif; font-size: 14px;">Cerca de Serveis per Categories</h5>
-      </div>
-
-
-    <h1 class="documentFirstHeading"
-        i18n:translate="heading_advanced_search">Advanced search for content</h1>
+    <h1 class="documentFirstHeading" i18n:translate="">Cerca de Serveis per Categories</h1>
 
     <p i18n:translate="description_advanced_search">
     This search form enables you to find content on the site by

@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.0Beta'
+version = '1.0'
 
 setup(name='upc.genweb.kbpuc',
       version=version,
@@ -17,7 +17,7 @@ setup(name='upc.genweb.kbpuc',
       keywords='',
       author='JVC',
       author_email='jose.luis.vivanco@upcnet.es',
-      url='http://svn.plone.org/svn/plone/plone.app.example',
+      url='',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['upc', 'upc.genweb'],

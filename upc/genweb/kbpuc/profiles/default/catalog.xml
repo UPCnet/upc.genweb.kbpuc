@@ -27,7 +27,7 @@
  </index>
  <column value="getCategoria"/>  
 
- <index name="getProducte" meta_type="FieldIndex">
+ <index name="getProducte" meta_type="KeywordIndex">
     <indexed_attr value="getProducte"/>
  </index>
  <column value="getProducte"/>  

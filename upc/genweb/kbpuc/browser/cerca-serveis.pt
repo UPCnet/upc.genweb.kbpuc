@@ -95,6 +95,7 @@
                 <select name="getServei:list"
                         id="getServei"
                         size="7"
+                        multiple="multiple"
                         tal:define="serv view/listServ">
 
                     <option value="#"
@@ -106,7 +107,30 @@
                     </option>
                 </select>
 
+
                 <br />
+
+                <input type="radio"
+                       name="getServei:ignore_empty"
+                       id="getServei_or"
+                       value=""
+                       class="noborder"
+                       tal:attributes="checked python:0"/>
+                    <label for="getServei_or" i18n:translate="description_subject_or">
+                        Match any
+                    </label>
+                    <br />
+
+                <input type="radio"
+                        name="getServei:ignore_empty"
+                        id="getServei_and"
+                        value="operator:and"
+                        class="noborder"
+                        tal:attributes="checked python:0"/>
+                <label for="getServei_and" i18n:translate="description_subject_and">
+                    Match all
+                </label>
+
 
             </div>
 
@@ -171,8 +195,8 @@
                 keywords.
                 </div>
 
-                <select name="Subject:list"
-                        id="Subject"
+                <select name="getProducte:list"
+                        id="getProducte"
                         size="7"
                         multiple="multiple"
                         tal:define="productes view/getProductes">
@@ -189,23 +213,23 @@
                 <br />
 
                 <input type="radio"
-                       name="Subject_usage:ignore_empty"
-                       id="Subject_or"
+                       name="getProducte_usage:ignore_empty"
+                       id="getProducte_or"
                        value=""
                        class="noborder"
-                       tal:attributes="checked python:1"/>
-                    <label for="Subject_or" i18n:translate="description_subject_or">
+                       tal:attributes="checked python:0"/>
+                    <label for="getProducte_or" i18n:translate="description_subject_or">
                         Match any
                     </label>
                     <br />
 
                 <input type="radio"
-                        name="Subject_usage:ignore_empty"
-                        id="Subject_and"
+                        name="getProducte_usage:ignore_empty"
+                        id="getProducte_and"
                         value="operator:and"
                         class="noborder"
                         tal:attributes="checked python:0"/>
-                <label for="Subject_and" i18n:translate="description_subject_and">
+                <label for="getProducte_and" i18n:translate="description_subject_and">
                     Match all
                 </label>
             </div>
@@ -246,7 +270,7 @@
                        id="Subject_or"
                        value=""
                        class="noborder"
-                       tal:attributes="checked python:1"/>
+                       tal:attributes="checked python:0"/>
                     <label for="Subject_or" i18n:translate="description_subject_or">
                         Match any
                     </label>

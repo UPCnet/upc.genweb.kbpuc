@@ -111,7 +111,7 @@
                 <br />
 
                 <input type="radio"
-                       name="getServei:ignore_empty"
+                       name="getServei_usage:ignore_empty"
                        id="getServei_or"
                        value=""
                        class="noborder"
@@ -122,7 +122,7 @@
                     <br />
 
                 <input type="radio"
-                        name="getServei:ignore_empty"
+                        name="getServei_usage:ignore_empty"
                         id="getServei_and"
                         value="operator:and"
                         class="noborder"

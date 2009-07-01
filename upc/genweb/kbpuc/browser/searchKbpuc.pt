@@ -22,42 +22,14 @@
 <div metal:fill-slot="main"
      tal:define="use_types_blacklist request/use_types_blacklist | python:True;
                  use_navigation_root request/use_navigation_root | python:True;
-                 results python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root);
+                 resultsp python:here.queryCatalog(REQUEST=request,use_types_blacklist=use_types_blacklist, use_navigation_root=use_navigation_root);
+                 results python:view.datahandler(resultsp);
                  Batch python:modules['Products.CMFPlone'].Batch;
                  b_size python:20;b_start python:0;b_start request/b_start | b_start;
                  desc_length site_properties/search_results_description_length;
                  desc_ellipsis site_properties/ellipsis;
                  searchterm request/SearchableText|nothing;
                  use_view_action site_properties/typesUseViewActionInListings|python:();">
-
-    <form name="searchform" 
-          action="search"
-          class="searchPage">
-        <input class="searchPage"
-               name="SearchableText"
-               type="text"
-               size="25"
-               title="Search Site"
-               i18n:attributes="title title_search_title;"
-               tal:attributes="value request/SearchableText|nothing;"
-               />
-        <input class="searchPage searchButton"
-               type="submit"
-               value="Search"
-               i18n:attributes="value label_search;"/>
-
-        <p class="discreet"
-           i18n:translate="search_results_advanced">
-        Did you not find what you were looking for? Try the
-        <span i18n:name="advanced_search">
-        <a href=""
-           i18n:translate="search_results_advanced_link"
-           tal:attributes="href string:$portal_url/search_form?SearchableText=${request/SearchableText|python:''}">Advanced Search</a>
-        </span>
-        to refine your search.
-        </p>
-    </form>
-
 
     <h1 class="documentFirstHeading">
         <span i18n:translate="heading_search_results">
@@ -93,7 +65,7 @@
         <tal:entry define="result_url result/getURL;
                            result_type result/portal_type;
                            item_icon python:plone_view.getIcon(result);
-                           url python:'%s?searchterm=%s'%(test(result_type in use_view_action, result_url+'/view', result_url+'/'), searchterm);">
+                           url python:'%s?searchterm=%s'%(result_type in use_view_action and result_url+'/view' or result_url+'/', searchterm);">
             <dt tal:define="item_wf_state_class string:state-${result/review_state};"
                 tal:attributes="class python:'contenttype-' + normalizeString(result.portal_type)">
               <img tal:replace="structure item_icon/html_tag" />

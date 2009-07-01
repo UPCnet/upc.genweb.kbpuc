@@ -129,6 +129,18 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         schemata="default",
     ),
 
+
+    atapi.FileField('fitxer',
+              searchable=True,
+              languageIndependent=True,
+              storage = atapi.AnnotationStorage(migrate=True),
+              validators = (('isNonEmptyFile', V_REQUIRED),
+                             ('checkFileMaxSize', V_REQUIRED)),
+              widget = atapi.FileWidget(
+                        description = '',
+                        label=_(u'label_file', default=u'Fixter'),
+                        )),
+
 ))
 
 schemata.finalizeATCTSchema(procediment_kbpuc_Schema, moveDiscussion=False)

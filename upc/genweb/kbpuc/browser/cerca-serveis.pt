@@ -23,7 +23,7 @@
     good enough, this search form is just if you want to be more specific.
     </p>
 
-    <form action="search"
+    <form action="searchKbpuc"
           class="enableAutoFocus"
           method="get"
           name="search"
@@ -266,23 +266,23 @@
                 <br />
 
                 <input type="radio"
-                       name="Subject_usage:ignore_empty"
-                       id="Subject_or"
+                       name="getCategoria_usage:ignore_empty"
+                       id="getCategoria_or"
                        value=""
                        class="noborder"
                        tal:attributes="checked python:0"/>
-                    <label for="Subject_or" i18n:translate="description_subject_or">
+                    <label for="getCategoria_or" i18n:translate="description_subject_or">
                         Match any
                     </label>
                     <br />
 
                 <input type="radio"
-                        name="Subject_usage:ignore_empty"
-                        id="Subject_and"
+                        name="getCategoria_usage:ignore_empty"
+                        id="getCategoria_and"
                         value="operator:and"
                         class="noborder"
                         tal:attributes="checked python:0"/>
-                <label for="Subject_and" i18n:translate="description_subject_and">
+                <label for="getCategoria_and" i18n:translate="description_subject_and">
                     Match all
                 </label>
             </div>

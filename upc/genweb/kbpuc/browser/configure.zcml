@@ -105,6 +105,13 @@
         permission="zope2.View"
         />
         
-
+    <browser:page
+        for="*"
+        name="searchKbpuc"
+        class=".searchKbpuc.searchKbpuc"
+        template="searchKbpuc.pt"
+        permission="zope2.View"
+        />
+        
 </configure>
 

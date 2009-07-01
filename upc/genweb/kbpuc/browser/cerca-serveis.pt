@@ -247,22 +247,22 @@
                 (or <strong>Apple</strong> key on Mac) while clicking the
                 keywords.
                 </div>
-
-                <select name="Subject:list"
-                        id="Subject"
+                
+                <select name="getCategoria:list"
+                        id="getCategoria"
                         size="7"
                         multiple="multiple"
-                        tal:define="contentSubjects here/Subject;
-                                    usedSubjects python:here.portal_catalog.uniqueValuesFor('Subject');"
-                        >
+                        tal:define="categories view/getCategoria">
+
                     <option value="#"
-                            tal:repeat="subject usedSubjects"
-                            tal:content="subject"
-                            tal:attributes="value subject"
+                            tal:repeat="c categories"
+                            tal:content="c"
+                            tal:attributes="value c"
                             i18n:domain="plone-metadata"
-                            i18n:translate=""
-                            >dummy</option>
+                            i18n:translate="">
+                    </option>
                 </select>
+                
                 <br />
 
                 <input type="radio"

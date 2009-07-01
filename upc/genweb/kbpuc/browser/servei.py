@@ -54,5 +54,14 @@ class cercaServeis(BrowserView):
         new_list.sort()
         return new_list
 
-
+    def getCategoria(self):
+        """Return a list of metadata fields from portal_catalog.
+        """     
+        portal_catalog = getToolByName(self, 'portal_catalog')
+        mt = portal_catalog.searchResults(portal_type = 'Categoria')
+        new_list=[]
+        for f in mt:
+            new_list.append(f.Title)        
+        new_list.sort()
+        return new_list
 

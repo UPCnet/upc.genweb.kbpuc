@@ -18,8 +18,7 @@ class searchKbpuc(BrowserView):
         res = []        
           
         for serv in mt:            
-            c = '0'                    
-#            results.append(serv.Title);
+            c = '0'                 
             for dt in data:               
                 if dt.portal_type != 'Servei':
                         
@@ -31,22 +30,11 @@ class searchKbpuc(BrowserView):
                              results.append(dt)   
                           else:
                               continue                           
-                     else:
-                          if dt.getObject().getParentNode().getParentNode().UID() == serv.getObject().UID():                               
-                              results.append(dt)             
-            #import pdb; pdb.set_trace() 
-            res.append(results)                
-#            res.sort()                           
-        return res
-
-#    def serveis(self, data):
-#        portal_catalog = getToolByName(self, 'portal_catalog')
-#        mt = portal_catalog.searchResults(portal_type = 'Servei')    
-#
-#        new_list=[]
-#        for f in mt:
-#            new_list.append(f.Title)
-#        new_list.sort()
-#        
-#        return new_list
-        
+                     else:                 
+                          if dt.getObject().getParentNode().getParentNode().UID() == serv.getObject().UID(): 
+                             if c == '0':
+                                 results.append(serv) 
+                                 c = '1'                               
+                             results.append(dt)           
+            res.append(results) 
+        return res        

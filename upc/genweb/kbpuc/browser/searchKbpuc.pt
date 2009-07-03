@@ -60,7 +60,6 @@
 
     <div tal:condition="results"       	 
          tal:define="batch python:Batch(results[0], b_size, int(b_start), orphan=1);">
-<!--    	 tal:repeat="r results"          	  -->
 
         <dl class="searchResults">
         <tal:results repeat="result batch">

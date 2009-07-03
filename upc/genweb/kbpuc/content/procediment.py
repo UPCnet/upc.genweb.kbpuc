@@ -130,7 +130,8 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
     ),
 
 
-    atapi.FileField('fitxer',
+    atapi.FileField(
+              name = 'fitxer',
               searchable=True,
               languageIndependent=True,
               storage = atapi.AnnotationStorage(migrate=True),
@@ -197,7 +198,7 @@ class Procediment(ATDocument):
 
     def getEquips(self):
         context = self.context
-        ptool = getToolByName(context, 'portal_properties')
+        ptool = getToolByName(context, 'portal_properties')       
         kbpucprops = ptool.kbpuc_properties
         return kbpucprops.EquipsResolutors.split('\n')
 

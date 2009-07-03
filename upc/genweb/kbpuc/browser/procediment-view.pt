@@ -66,7 +66,14 @@
                <li tal:condition="p" tal:content="p"></li>
             </ul>
         </tal:block>
-
+        
+        <tal:block>
+       		<h4 i18n:translate="">Fitxer annex:</h4>
+	        <metal:field use-macro="python:here.widget('fitxer', mode='view')">            
+	            File
+	        </metal:field>
+	    </tal:block>
+ 
         <div metal:use-macro="here/document_relateditems/macros/relatedItems">
             show related items if they exist
         </div>

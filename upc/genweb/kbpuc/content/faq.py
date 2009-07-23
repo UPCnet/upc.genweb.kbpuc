@@ -54,6 +54,20 @@ faq_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
         ),
         schemata="default",
     ),
+    
+    atapi.StringField(
+        name = 'categoria',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = "getCategoria",
+        widget = atapi.StringWidget(
+            label = _(u'label_categoria', default=u'Categoria'),
+            i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
+        ),
+        schemata="default",
+    ),
 
 
 ))
@@ -100,6 +114,9 @@ class Faq(ATDocument):
     def getServei(self):
         return self.getParentNode().getParentNode().title
 
-
+    security.declarePublic('getCategoria')
+    def getCategoria(self):
+        return self.getParentNode().title
+    
 atapi.registerType(Faq, PROJECTNAME)
 

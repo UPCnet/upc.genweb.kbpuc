@@ -142,6 +142,20 @@ procediment_kbpuc_Schema = ATDocumentSchema.copy() + atapi.Schema((
                         label=_(u'label_file', default=u'Fixter'),
                         )),
 
+    atapi.StringField(
+        name = 'categoria',
+        required = False,
+        searchable = False,
+        languageIndependent=True,
+        default = "getCategoria",
+        widget = atapi.StringWidget(
+            label = _(u'label_categoria', default=u'Categoria'),
+            i18n_domain='upc.genweb.kbpuc',
+            visible = {'view': 'hidden','edit': 'hidden'}
+        ),
+        schemata="default",
+    ),                        
+
 ))
 
 schemata.finalizeATCTSchema(procediment_kbpuc_Schema, moveDiscussion=False)
@@ -206,5 +220,9 @@ class Procediment(ATDocument):
     def getServei(self):
         return self.getParentNode().getParentNode().title
 
+    security.declarePublic('getCategoria')
+    def getCategoria(self):
+        return self.getParentNode().title
+    
 atapi.registerType(Procediment, PROJECTNAME)
 

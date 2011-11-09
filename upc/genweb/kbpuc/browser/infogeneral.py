@@ -1,14 +1,10 @@
-from Acquisition import aq_inner
+# -*- coding: utf-8 -*-
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 
-from Products.CMFCore.utils import getToolByName
-from upc.genweb.kbpuc.interfaces import IInfoGeneral
-
-from plone.memoize.instance import memoize
 
 class InfoGeneralView(BrowserView):
-    """Default view of a Informació General
+    """Default view of a Informacio General
     """
 
     # This template will be used to render the view. An implicit variable
@@ -17,4 +13,3 @@ class InfoGeneralView(BrowserView):
     # being rendered.
 
     __call__ = ViewPageTemplateFile('info-general-view.pt')
-

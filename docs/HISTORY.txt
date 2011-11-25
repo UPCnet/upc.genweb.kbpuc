@@ -1,7 +1,10 @@
 Changelog
 =========
 
+1.1 (2011-11-25)
+----------------
+* GenwebUPC 4 ready.
+
 1.0 (xxxx-xx-xx)
 ----------------
-
 * Initial release

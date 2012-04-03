@@ -27,7 +27,9 @@
           class="enableAutoFocus"
           method="get"
           name="search"
-          tal:define="DateTime python:modules['DateTime'].DateTime">
+          tal:define="DateTime python:modules['DateTime'].DateTime;
+                      portal context/@@plone_portal_state/portal;"
+          >
 
         <fieldset>
 

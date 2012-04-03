@@ -28,7 +28,8 @@
         <metal:body_macro metal:define-macro="body">
           <div tal:replace="structure provider:plone.abovecontentbody" />
 
-          <tal:fields tal:define="field_macro field_macro | here/widgets/field/macros/view"
+          <tal:fields tal:define="field_macro field_macro | here/widgets/field/macros/view;
+            portal context/@@plone_portal_state/portal;"
                       tal:repeat="field python:here.Schema().filterFields(isMetadata=0)">
 
             <tal:if_visible define="mode string:view;

@@ -28,8 +28,7 @@
 
         <div tal:replace="structure provider:plone.abovecontentbody" />
 
-        <p tal:condition="python: not text and is_editable"
-           i18n:translate="no_body_text"
+        <p i18n:translate="no_body_text"
            class="discreet">
             This item does not have any body text, click the edit tab to change it.
         </p>
@@ -45,7 +44,7 @@
             <div tal:condition="txt" tal:content="structure txt">
             </div>
         </tal:block>
-        
+
         <tal:block tal:define="prod here/getProducte">
             <h4 tal:condition="prod" class="formQuestion" i18n:translate="">Productes Relacionats:</h4>
             <ul tal:condition="prod" tal:repeat="p prod">
@@ -66,14 +65,14 @@
                <li tal:condition="p" tal:content="p"></li>
             </ul>
         </tal:block>
-        
+
         <tal:block>
        		<h4 i18n:translate="">Fitxer annex:</h4>
-	        <metal:field use-macro="python:here.widget('fitxer', mode='view')">            
+	        <metal:field use-macro="python:here.widget('fitxer', mode='view')">
 	            File
 	        </metal:field>
 	    </tal:block>
- 
+
         <div metal:use-macro="here/document_relateditems/macros/relatedItems">
             show related items if they exist
         </div>
@@ -85,7 +84,7 @@
             <li tal:condition="reg" tal:content="reg">
                Registro
             </li>
-          </ul>        	  
+          </ul>
          </dd>
 	</dl>
 

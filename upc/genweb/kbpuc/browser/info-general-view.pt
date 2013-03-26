@@ -7,27 +7,9 @@
       i18n:domain="plone">
 <body>
 
-<metal:main fill-slot="main">
-    <tal:main-macro metal:define-macro="main"
-           tal:define="kssClassesView context/@@kss_field_decorator_view;
-                       getKssClasses nocall:kssClassesView/getKssClassesInlineEditable;
-                       templateId template/getId;
-                       text here/getText">
-
-        <div tal:replace="structure provider:plone.abovecontenttitle" />
-
-
-        <h1 class="documentFirstHeading"> 
-            <span tal:content="here/Title"></span>
-        </h1>
-
-        <div tal:replace="structure provider:plone.belowcontenttitle" />
-
-        <p class="documentDescription">
-            <span tal:content="here/Description"></span>
-        </p>
-
-        <div tal:replace="structure provider:plone.abovecontentbody" />
+<metal:content-core fill-slot="content-core">
+  <metal:content-core define-macro="content-core"
+      tal:define="text here/getText">
 
         <p tal:condition="python: not text and is_editable"
            i18n:translate="no_body_text"
@@ -45,11 +27,6 @@
                <li tal:content="p"></li>
             </ul>
         </tal:block>
-        
-        <div metal:use-macro="here/document_relateditems/macros/relatedItems">
-            show related items if they exist
-        </div>
-
 
         <dl class="collapsible inline collapsedOnLoad">
          <dt class="collapsibleHeader" i18n:translate="faqTIC_serveis_relacionats">Llistat de Modificacions:</dt>
@@ -58,13 +35,12 @@
             <li tal:condition="reg" tal:content="reg">
                Registro
             </li>
-          </ul>        
+          </ul>
          </dd>
         </dl>
-        
-    </tal:main-macro>
 
-</metal:main>
+  </metal:content-core>
+</metal:content-core>
 
 </body>
 </html>
